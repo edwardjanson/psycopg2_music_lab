@@ -1,6 +1,7 @@
 from db.run_sql import run_sql
 
 from models.artist import Artist
+from models.album import Album
 import repositories.album_repository as album_repository
 
 
@@ -60,8 +61,13 @@ def update(artist):
     run_sql(sql, values)
 
 def albums(artist):
+    albums = []
     sql = "SELECT * FROM albums WHERE artist_id = %s"
     values = [artist.id]
     results = run_sql(sql, values)
+
+    for row in results:
+        album = Album(row['title'], row['genre'], artist, row['id'])
+        albums.append(album)
     
-    return results
+    return albums

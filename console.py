@@ -28,6 +28,7 @@ for album in album_repository.select_all():
 for artist in artist_repository.select_all():
     print(artist.__dict__)
 
-print(f"list all albums: {artist_repository.albums(artist_1)}")
+albums = artist_repository.albums(artist_1)
+print(f"list all albums: {albums}")
 
 pdb.set_trace()
